@@ -13,9 +13,10 @@
   	### LEYENDA REGISTROS ###
 		# $t0 -> Direccion del String recorrido
 		# $t1 -> Almacena cada byte del String (caracteres)
-		# $t2 -> Flag de signo puede ser 1 o -1, ya que al final el número se multiplicará por ese valor 
+		# $t2 -> Flag de signo puede ser 1 o -1, ya que al final el nÃºmero se multiplicarÃ¡ por ese valor 
   
     add $t0, $zero, $a0
+    
     
     li $v0, 0 # Resultado
     li $t9, 10
@@ -24,7 +25,7 @@
       lb $t1, 0($t0)
       addi $t0, $t0, 1
       beq $t1, 32, START # En caso de encontrarse un espacio sigue recorriendo
-      beq $t1, 45, NEGATIVE # En caso de encontrarse un - marcará el flag como -1
+      beq $t1, 45, NEGATIVE # En caso de encontrarse un - marcarï¿½ el flag como -1
       li $t2, 1
       beq $t1, 43, POSITIVE
       j LECTURE
@@ -56,12 +57,14 @@
 			beq $v0, 0, COMPROBATE_ERROR_1
       mul $v0, $v0, $t2
       li $v1, 0
+      li $v1, 0
       jr $ra
 		COMPROBATE_ERROR_1:
 			addi $t0, $t0, -2
 			lb $t1, 0($t0)
 			blt $t1, 48, EXIT_ERROR_1
       bgt $t1, 57, EXIT_ERROR_1
+      			li $v1, 0
       			li $v1, 0
 			jr $ra
   
@@ -72,6 +75,7 @@
 		COMPROBATE_EXIT_ERROR_2:
 			bne $v0, -2147483648, EXIT_ERROR_2
 			bne $t2, -1, EXIT_ERROR_2
+			li $v1, 0
 			li $v1, 0
 			jr $ra
 
